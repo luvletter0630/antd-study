@@ -13,11 +13,11 @@ Mock.mock(`${process.env.VUE_APP_API_BASE_URL}/login`, 'post', ({body}) => {
 
   let success = false
 
-  if (name === 'admin' && password === '888888') {
+  if (name === 'admin' && password === '000000') {
     success = true
     result.data.permissions = [{id: 'queryForm', operation: ['add', 'edit']}]
     result.data.roles = [{id: 'admin', operation: ['add', 'edit', 'delete']}]
-  } else if (name === 'test' || password === '888888') {
+  } else if (name === 'test' || password === '000000') {
     success = true
     result.data.permissions = [{id: 'queryForm', operation: ['add', 'edit']}]
     result.data.roles = [{id: 'test', operation: ['add', 'edit', 'delete']}]
@@ -33,7 +33,7 @@ Mock.mock(`${process.env.VUE_APP_API_BASE_URL}/login`, 'post', ({body}) => {
     result.data.expireAt = new Date(new Date().getTime() + 30 * 60 * 1000)
   } else {
     result.code = -1
-    result.message = '账户名或密码错误（admin/888888 or test/888888）'
+    result.message = '账户名或密码错误（admin/000000 or test/000000）'
   }
   return result
 })

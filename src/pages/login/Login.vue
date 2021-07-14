@@ -25,7 +25,7 @@
             <a-form-item>
               <a-input
                 size="large"
-                placeholder="888888"
+                placeholder="000000"
                 autocomplete="autocomplete"
                 type="password"
                 v-decorator="['password', {rules: [{ required: true, message: '请输入密码', whitespace: true}]}]"
@@ -100,6 +100,7 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err) => {
+        console.log(err);
         if (!err) {
           this.logging = true
           const name = this.form.getFieldValue('name')
@@ -109,6 +110,7 @@ export default {
       })
     },
     afterLogin(res) {
+      console.log(res)
       this.logging = false
       const loginRes = res.data
       if (loginRes.code >= 0) {

@@ -105,6 +105,11 @@ const options = {
               component: () => import('@/pages/Demo')
             },
             {
+              path: 'appManager',
+              name: '应用管理',
+              component: () => import('@/pages/list/DeployAppList'),
+            },
+            {
               path: 'primary',
               name: '标准列表',
               component: () => import('@/pages/list/StandardList'),

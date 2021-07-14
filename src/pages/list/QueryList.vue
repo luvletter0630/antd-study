@@ -101,7 +101,11 @@
         @selectedRowChange="onSelectChange"
       >
         <div slot="description" slot-scope="{text}">
-          {{text}}
+          <a-select default-value="lucy" style="width: 120px" @change="handleChange">
+            <a-select-option v-for="item in text" :key="item" :value="item">
+              {{ item }}
+            </a-select-option>
+          </a-select>
         </div>
         <div slot="action" slot-scope="{text, record}">
           <a style="margin-right: 8px">
@@ -167,7 +171,7 @@ for (let i = 0; i < 100; i++) {
   dataSource.push({
     key: i,
     no: 'NO ' + i,
-    description: '这是一段描述',
+    description: ['1','2','3','4'],
     callNo: Math.floor(Math.random() * 1000),
     status: Math.floor(Math.random() * 10) % 4,
     updatedAt: '2018-07-26'
@@ -182,7 +186,7 @@ export default {
       advanced: true,
       columns: columns,
       dataSource: dataSource,
-      selectedRows: []
+      selectedRows: [],
     }
   },
   authorize: {
