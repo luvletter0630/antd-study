@@ -105,6 +105,11 @@ const options = {
               component: () => import('@/pages/Demo')
             },
             {
+              path: 'formManager',
+              name: 'form管理',
+              component: () => import('@/pages/list/formTest'),
+            },
+            {
               path: 'appManager',
               name: '应用管理',
               component: () => import('@/pages/list/DeployAppList'),

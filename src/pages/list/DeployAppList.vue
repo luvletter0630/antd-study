@@ -10,7 +10,7 @@
                   :labelCol="{span: 5}"
                   :wrapperCol="{span: 18, offset: 1}"
               >
-                <a-input placeholder="请输入" />
+                <a-input placeholder="请输入"/>
               </a-form-item>
             </a-col>
           </a-row>
@@ -36,19 +36,13 @@
           <a-form layout='vertical' :form="form">
             <!--每一项元素-->
             <a-form-item label='应用名称'>
-              <a-select placeholder="请选择" id="appName">
+              <a-select placeholder="请选择" v-decorator="['appName',{ rules: [{ required: true, message: 'Please select your appName!' }] },]">
                 <a-select-option value="1">关闭</a-select-option>
                 <a-select-option value="2">运行中</a-select-option>
               </a-select>
             </a-form-item>
-            <a-form-item label='部署节点'>
-              <a-select placeholder="请选择" id="appSever">
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
-              </a-select>
-            </a-form-item>
-            <a-form-item label="部署路径" >
-              <a-input placeholder="请输入" id="deployPath"/>
+            <a-form-item label="部署路径">
+              <a-input placeholder="请输入" v-decorator="['deployPath',{ rules: [{ required: true, message: 'Please input your deployPath!' }] },]"/>
             </a-form-item>
           </a-form>
         </a-modal>
@@ -81,6 +75,7 @@
 
 <script>
 import StandardTable from '@/components/table/StandardTable'
+import {METHOD, request} from "@/utils/request";
 
 const columns = [
   {
@@ -159,14 +154,18 @@ export default {
     },
     handleOk() {
       const form = this.form;
-      form.validateFields((err, values) => {
-        if (err) {
-          return;
+      form.validateFields((err) => {
+        if (!err) {
+          const url = 'http://localhost:8888/appName/' + form.getFieldValue('appName') +'/deployPath/' + form.getFieldValue('deployPath');
+          console.log(url);
+          request(url,METHOD.PUT).then(this.afterSubmitForm);
         }
-        console.log('form 表单内容: ', values);
         form.resetFields();
         this.visible = false;
       });
+    },
+    afterSubmitForm(res){
+      console.log(res);
     },
     handleCancel() {
       this.visible = false;
